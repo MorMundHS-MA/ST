@@ -22,14 +22,13 @@ public class Program {
      * Diese Methode Filtert die Eingabe.
      */
     private static void setProdukt() {
-        /*
-        Scanner in = new Scanner();
+        Scanner in = new Scanner(System.in);
 
         String produkt;
 
         try {
              produkt = in.nextLine();
-            if(!produkt.equalsIgnoreCase("Kakao" || "Tee" || "Kaffee" || "Abbruch")) {
+            if(!Helper.stringEqualsAny(produkt, new String[]{"Kakao" , "Tee" , "Kaffee" , "Abbruch"},true)) {
                 throw new Exception();
             }
         }
@@ -38,7 +37,7 @@ public class Program {
             setProdukt();
         }
 
-        waehleProdukt(produkt); */
+       // waehleProdukt(produkt);
     }
 }
 
