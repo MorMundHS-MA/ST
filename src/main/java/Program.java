@@ -1,7 +1,11 @@
 import java.util.Scanner;
 
 public class Program {
+
+    private static KaffeeAutomat automat;
+
     public static void main(String[] args) {
+        automat = new AutomatenSteuerung();
         begrueßeKunde();
     }
 
@@ -24,20 +28,23 @@ public class Program {
     private static void setProdukt() {
         Scanner in = new Scanner(System.in);
 
-        String produkt;
+        String produkt = null;
 
-        try {
-             produkt = in.nextLine();
-            if(!Helper.stringEqualsAny(produkt, new String[]{"Kakao" , "Tee" , "Kaffee" , "Abbruch"},true)) {
-                throw new Exception();
+        while (produkt == null) {
+            try {
+                produkt = in.nextLine();
+                if (produkt.equalsIgnoreCase("Abbruch")) {
+                    return;
+                } else if (!Helper.stringEqualsAny(produkt, new String[]{"Kakao", "Tee", "Kaffee"}, true)) {
+                    throw new Exception();
+                }
+            } catch (Exception e) {
+                System.out.println("Wie schwer ist es Kakao oder Tee oder Kaffee einzutippen?");
+                produkt = null;
             }
         }
-        catch(Exception e) {
-            System.out.println("Wie schwer ist es Kakao oder Tee oder Kaffee einzutippen?");
-            setProdukt();
-        }
 
-       // waehleProdukt(produkt);
+        automat.waehleProdukt(produkt);
     }
 }
 
