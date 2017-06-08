@@ -67,21 +67,32 @@ public class AutomatenSteuerung implements KaffeeAutomat {
 
     public int fordereWechselgeld() {
         if (selectedProdukt == null) {
-            return 0;
+            int wechselGeld = eingeworfenesGeld;
+            System.out.printf("Hier ist ihr Wechselgeld in Höhe von %s.", Helper.formatMoney(wechselGeld, '€'));
+            eingeworfenesGeld = 0;
+            return wechselGeld;
         }
 
         int wechselGeld = Math.max(0, eingeworfenesGeld - (selectedProdukt.getPreis() + getOptionsCost()));
-        System.out.printf("Hier ist ihr Wechselgeld in Höhe von %s.",Helper.formatMoney(wechselGeld,'€'));
+        System.out.printf("Hier ist ihr Wechselgeld in Höhe von %s.", Helper.formatMoney(wechselGeld, '€'));
         eingeworfenesGeld = 0;
         return wechselGeld;
     }
 
     public int zapfeProdukt() {
-        if (selectedProdukt == null)        {
+        if (selectedProdukt == null) {
             System.out.println("Warum bin ich hier?");
             return 0;
         }
-        System.out.printf("Frischer %s kommt sofort! Bitte beehren sie uns bald wieder!\n",selectedProdukt.getBezeichnung());
+
+        System.out.printf("Frischer %s kommt sofort! Bitte beehren sie uns bald wieder!\n", selectedProdukt.getBezeichnung());
+        AutomatenSteuerung.protokoll.verkaufeProdukt(
+                selectedProdukt,
+                selectedOptions.toArray(new String[selectedOptions.size()]),
+                selectedProdukt.getPreis() + getOptionsCost());
+        selectedProdukt = null;
+        selectedOptions = null;
+        eingeworfenesGeld = 0;
         return fordereWechselgeld();
     }
 

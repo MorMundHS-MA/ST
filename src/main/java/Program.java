@@ -6,7 +6,9 @@ public class Program {
 
     public static void main(String[] args) {
         automat = new AutomatenSteuerung();
-        begrueßeKunde();
+        while(true) {
+            begrueßeKunde();
+        }
     }
 
     //Diese Methode begrueßt den Kunden per Konsolenausgabe und fordert zur
