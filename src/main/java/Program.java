@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Program {
 
-    private static KaffeeAutomat automat;
+    private static AutomatenSteuerung automat;
 
     public static void main(String[] args) {
         automat = new AutomatenSteuerung();
@@ -34,6 +34,7 @@ public class Program {
             try {
                 produkt = in.nextLine();
                 if (produkt.equalsIgnoreCase("Abbruch")) {
+                    automat.abbruch();
                     return;
                 } else if (!Helper.stringEqualsAny(produkt, new String[]{"Kakao", "Tee", "Kaffee"}, true)) {
                     throw new Exception();
@@ -45,6 +46,39 @@ public class Program {
         }
 
         automat.waehleProdukt(produkt);
+        while (true) {
+            System.out.println("Gib eine Zusatzoption ein oder 'Start' zum ausfuehren der Bestellung oder 'Abbruch' zum abbrechen.");
+            String option;
+            option = in.nextLine();
+            if (option.equalsIgnoreCase("Abbruch")) {
+                automat.abbruch();
+                return;
+            } else if (option.equalsIgnoreCase("Start")) {
+                break;
+            } else {
+                automat.waehleOption(option);
+            }
+        }
+
+        automat.bezahleBetrag(0);
+        while (!automat.istBezahlt()) {
+            String geld = in.nextLine();
+            if (geld.equalsIgnoreCase("Abbruch")) {
+                automat.abbruch();
+                return;
+            } else {
+                try {
+                    int betrag = Integer.parseInt(geld);
+                    automat.bezahleBetrag(betrag);
+                } catch (NumberFormatException fe) {
+                    System.out.println("Nein kein Monopoly Geld.");
+                    automat.abbruch();
+                }
+            }
+        }
+
+        automat.zapfeProdukt();
+        in.close();
     }
 }
 

@@ -39,4 +39,9 @@ public abstract class Produkt {
     public String getBezeichnung() {
         return bezeichnung;
     }
+
+    public String[] getOptionen() {
+        return optionen;
+    }
+
 }
