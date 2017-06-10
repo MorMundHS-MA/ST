@@ -1,1 +1,0 @@
-INDEX VERSION 1.130+/home/david/git/ST/.metadata/.plugins/org.eclipse.jdt.core
