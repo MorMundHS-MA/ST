@@ -15,10 +15,6 @@ public class Tee extends Produkt {
         super(bereitsBezahlt);
     }
 
-    public void bezahleBetrag(AutomatenSteuerung automat, int betrag) {
-        automat.changeState(new Bezahlung(this, super.bezahlterBetrag));
-    }
-
     public void waehleProdukt(AutomatenSteuerung automat, String produkt) {
         System.out.println("Brechen Sie die momentane Bestellung ab um das Produkt neu zuwaehlen.");
     }

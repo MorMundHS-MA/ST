@@ -1,78 +1,26 @@
-package com.coffee.machine.states;
+package com.coffee.machine;
 
-import com.coffee.machine.AutomatenSteuerung;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import com.coffee.machine.states.Kaffee;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class KaffeeTest {
-
-    public KaffeeTest() {
-    }
-
-    @Test
-    public void testI() {
-        testAbbruch();
-    }
-
-    @Test
-    public void testII() {
-        testFordereWechselgeld();
-    }
-
-    @Test
-    public void testIV() {
-        testGetMoeglicheOptionen();
-        testGetPreis();
-        testGetOptionsCost();
-    }
-
-    @Test
-    public void testV() {
-
-    }
-
-    @Test
-    public void testVI() {
-        testZapfeProdukt();
-    }
-
-    /**
-     * Test of bezahleBetrag method, of class Kaffee.
-     */
-    @org.junit.Test
-    public void testBezahleBetrag() {
-        System.out.println("bezahleBetrag");
-        AutomatenSteuerung automat = new AutomatenSteuerung();
-        int betrag = 200;
-        Kaffee instance = new Kaffee(200);
-        assertEquals(200, instance.bezahlterBetrag);
-        instance = new Kaffee(0);
-        instance.bezahleBetrag(automat, 200);
-        assertEquals(200, instance.bezahlterBetrag);
-    }
-
     /**
      * Test of waehleProdukt method, of class Kaffee.
      */
-    @org.junit.Test
+    @Test
     public void testWaehleProdukt() {
         System.out.println("waehleProdukt");
         AutomatenSteuerung automat = new AutomatenSteuerung();
         String produkt = "";
         Kaffee instance = new Kaffee(0);
         instance.waehleProdukt(automat, produkt);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of waehleOption method, of class Kaffee.
      */
-    @org.junit.Test
+    @Test
     public void testWaehleOption() {
         System.out.println("waehleOption");
         AutomatenSteuerung automat = new AutomatenSteuerung();
@@ -89,7 +37,7 @@ public class KaffeeTest {
     /**
      * Test of fordereWechselgeld method, of class Kaffee.
      */
-    @org.junit.Test
+    @Test
     public void testFordereWechselgeld() {
         System.out.println("fordereWechselgeld");
         AutomatenSteuerung automat = new AutomatenSteuerung();;
@@ -103,7 +51,7 @@ public class KaffeeTest {
     /**
      * Test of zapfeProdukt method, of class Kaffee.
      */
-    @org.junit.Test
+    @Test
     public void testZapfeProdukt() {
         System.out.println("zapfeProdukt");
         AutomatenSteuerung automat = new AutomatenSteuerung();;
@@ -139,7 +87,7 @@ public class KaffeeTest {
     /**
      * Test of abbruch method, of class Kaffee.
      */
-    @org.junit.Test
+    @Test
     public void testAbbruch() {
         System.out.println("abbruch");
         AutomatenSteuerung automat = new AutomatenSteuerung();
@@ -167,27 +115,6 @@ public class KaffeeTest {
         expResult = 200;
         result = instance.abbruch(automat);
         assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of getMoeglicheOptionen method, of class Kaffee.
-     */
-    @org.junit.Test
-    public void testGetMoeglicheOptionen() {
-        AutomatenSteuerung automat = new AutomatenSteuerung();
-        System.out.println("getMoeglicheOptionen");
-        Kaffee instance = new Kaffee(1);
-        String[] expResult = new String[]{"Milch", "Schokostreusel", "Zucker"};
-        String[] result = instance.getMoeglicheOptionen();
-        assertArrayEquals(expResult, result);
-        instance.waehleOption(automat, "Milch");
-        result = instance.getMoeglicheOptionen();
-        assertArrayEquals(expResult, result);
-        instance.waehleOption(automat, "Zucker");
-        instance.waehleOption(automat, "Schokostreusel");
-        instance.waehleOption(automat, "Keks");
-        result = instance.getMoeglicheOptionen();
-        assertArrayEquals(expResult, result);
     }
 
     /**

@@ -21,6 +21,8 @@ public class Program {
 
             if (input.equalsIgnoreCase("Abbruch")) {
                 automat.abbruch();
+            }else if(input.equalsIgnoreCase("Zapfen")){
+                automat.zapfeProdukt();
             } else if (geld > 0) {
                 automat.bezahleBetrag(geld);
             } else if (status instanceof Leerlauf) {

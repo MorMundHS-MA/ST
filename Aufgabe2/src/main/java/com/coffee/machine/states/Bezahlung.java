@@ -11,10 +11,12 @@ public class Bezahlung implements AutomatenStatus {
     public Bezahlung(Produkt produkt, int bezahlterBetrag) {
         this.gewaehltesProdukt = produkt;
         this.bezahlterBetrag = bezahlterBetrag;
+        gewaehltesProdukt.printSelectionInfo(bezahlterBetrag);
     }
 
     public void bezahleBetrag(AutomatenSteuerung automat, int betrag) {
         this.bezahlterBetrag += betrag;
+        gewaehltesProdukt.printSelectionInfo(bezahlterBetrag);
     }
 
     public void waehleProdukt(AutomatenSteuerung automat, String produkt) {
@@ -30,7 +32,14 @@ public class Bezahlung implements AutomatenStatus {
     }
 
     public int zapfeProdukt(AutomatenSteuerung automat) {
-        return fordereWechselgeld(automat);
+        if (bezahlterBetrag < gewaehltesProdukt.getPreis() + gewaehltesProdukt.getOptionsCost())        {
+            gewaehltesProdukt.printSelectionInfo(bezahlterBetrag);
+            return 0;
+        }
+        automat.changeState(
+                new ProduktAusgabe(bezahlterBetrag,
+                        gewaehltesProdukt.getPreis() + gewaehltesProdukt.getOptionsCost()));
+        return automat.zapfeProdukt();
     }
 
     public int abbruch(AutomatenSteuerung automat) {

@@ -31,6 +31,14 @@ public class ProduktAusgabe  implements AutomatenStatus {
     }
 
     public int zapfeProdukt(AutomatenSteuerung automat) {
+        System.out.println("Produkt wird gezapft...");
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Vielen Dank für ihre Bestellung beehren Sie uns bald wieder");
         return automat.fordereWechselgeld();
     }
 
