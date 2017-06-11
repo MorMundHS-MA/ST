@@ -7,7 +7,7 @@ import com.coffee.machine.Helper;
 public class Kaffee extends Produkt {
 
     private final static String[] optionen = new String[]{"Milch", "Schokostreusel", "Zucker"};
-    private final static int preis = 100;
+    private final static int preis = 120;
     private final static String name = "Kaffee";
     private final static int preisPerOption = 10;
 
