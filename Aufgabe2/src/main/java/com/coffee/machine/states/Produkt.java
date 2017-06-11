@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Produkt implements AutomatenStatus {
+
     protected List<String> gewaehlteOptionen = new ArrayList<String>();
     protected int bezahlterBetrag = 0;
 
@@ -16,9 +17,13 @@ public abstract class Produkt implements AutomatenStatus {
     }
 
     protected abstract String[] getMoeglicheOptionen();
+
     public abstract String getProduktName();
+
     public abstract int getPreis();
+
     public abstract int getOptionsCost();
+
     public void printSelectionInfo(int bezahlterBetrag) {
         if (gewaehlteOptionen.size() > 0) {
             System.out.printf("%s wurde mit %s ausgewählt. Preis ist : %s. Optionen sind : %s\n",
