@@ -26,12 +26,13 @@ public class KalterKakao extends Produkt {
         if (option.equalsIgnoreCase("Heiss")) {
             automat.changeState(new HeisserKakao(super.bezahlterBetrag));
         } else {
-            System.out.printf("Optionen %s ist leider nicht verfügbar.", option);
+            System.out.printf("Option %s ist leider nicht verfügbar.", option);
         }
     }
 
     public int fordereWechselgeld(AutomatenSteuerung automat) {
-        return bezahlterBetrag;
+        automat.changeState(new Bezahlung(this, super.bezahlterBetrag));
+        return automat.fordereWechselgeld();
     }
 
     public int zapfeProdukt(AutomatenSteuerung automat) {
