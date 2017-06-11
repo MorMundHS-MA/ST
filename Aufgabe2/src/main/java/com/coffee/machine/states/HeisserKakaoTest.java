@@ -15,7 +15,7 @@ public class HeisserKakaoTest {
     }
 
     /**
-     * Kakao und dessen Temperaturauswahl geschieht in einem Schritt.
+     * Kakao- und dessen Temperaturauswahl geschehen in einem Schritt.
      */
     @Test
     public void testIII() {
