@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.coffee.machine.states;
 
 import com.coffee.machine.AutomatenSteuerung;
@@ -13,29 +8,36 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Marco
- */
 public class KaffeeTest {
 
     public KaffeeTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() {
+    @Test
+    public void testI() {
+        testAbbruch();
     }
 
-    @AfterClass
-    public static void tearDownClass() {
+    @Test
+    public void testII() {
+        testFordereWechselgeld();
     }
 
-    @Before
-    public void setUp() {
+    @Test
+    public void testIV() {
+        testGetMoeglicheOptionen();
+        testGetPreis();
+        testGetOptionsCost();
     }
 
-    @After
-    public void tearDown() {
+    @Test
+    public void testV() {
+
+    }
+
+    @Test
+    public void testVI() {
+        testZapfeProdukt();
     }
 
     /**
@@ -44,12 +46,13 @@ public class KaffeeTest {
     @org.junit.Test
     public void testBezahleBetrag() {
         System.out.println("bezahleBetrag");
-        AutomatenSteuerung automat = null;
-        int betrag = 0;
-        Kaffee instance = null;
-        instance.bezahleBetrag(automat, betrag);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        AutomatenSteuerung automat = new AutomatenSteuerung();
+        int betrag = 200;
+        Kaffee instance = new Kaffee(200);
+        assertEquals(200, instance.bezahlterBetrag);
+        instance = new Kaffee(0);
+        instance.bezahleBetrag(automat, 200);
+        assertEquals(200, instance.bezahlterBetrag);
     }
 
     /**
@@ -58,9 +61,9 @@ public class KaffeeTest {
     @org.junit.Test
     public void testWaehleProdukt() {
         System.out.println("waehleProdukt");
-        AutomatenSteuerung automat = null;
+        AutomatenSteuerung automat = new AutomatenSteuerung();
         String produkt = "";
-        Kaffee instance = null;
+        Kaffee instance = new Kaffee(0);
         instance.waehleProdukt(automat, produkt);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -72,41 +75,66 @@ public class KaffeeTest {
     @org.junit.Test
     public void testWaehleOption() {
         System.out.println("waehleOption");
-        AutomatenSteuerung automat = null;
-        String option = "";
-        Kaffee instance = null;
-        instance.waehleOption(automat, option);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        AutomatenSteuerung automat = new AutomatenSteuerung();
+        Kaffee instance = new Kaffee(140);
+        instance.waehleOption(automat, "Milch");
+        instance.waehleOption(automat, "Zucker");
+        assertEquals(0, instance.zapfeProdukt(automat));
+        instance = new Kaffee(140);
+        instance.waehleOption(automat, "Keks");
+        instance.waehleOption(automat, "Zwiebel");
+        assertEquals(20, instance.zapfeProdukt(automat));
     }
 
-//    /**
-//     * Test of fordereWechselgeld method, of class Kaffee.
-//     */
-//    @org.junit.Test
-//    public void testFordereWechselgeld() {
-//        System.out.println("fordereWechselgeld");
-//        AutomatenSteuerung automat = new AutomatenSteuerung();;
-//        Kaffee instance = new Kaffee(2000);
-//        int expResult = 1880;
-//        instance.bezahleBetrag(automat, 120);
-//        instance.zapfeProdukt(automat);
-//        int result = instance.fordereWechselgeld(automat);
-//        assertEquals(expResult, result);
-//    }
+    /**
+     * Test of fordereWechselgeld method, of class Kaffee.
+     */
+    @org.junit.Test
+    public void testFordereWechselgeld() {
+        System.out.println("fordereWechselgeld");
+        AutomatenSteuerung automat = new AutomatenSteuerung();;
+        Kaffee instance = new Kaffee(150);
+        int expResult = 30;
+        int result = instance.fordereWechselgeld(automat);
+        System.out.println("Wechselgeld: " + result);
+        assertEquals(expResult, result);
+    }
 
-//    /**
-//     * Test of zapfeProdukt method, of class Kaffee.
-//     */
-//    @org.junit.Test
-//    public void testZapfeProdukt() {
-//        System.out.println("zapfeProdukt");
-//        AutomatenSteuerung automat = new AutomatenSteuerung();;
-//        Kaffee instance = new Kaffee(2000);
-//        int expResult = 1900;
-//        int result = instance.fordereWechselgeld(automat);
-//        assertEquals(expResult, result);
-//    }
+    /**
+     * Test of zapfeProdukt method, of class Kaffee.
+     */
+    @org.junit.Test
+    public void testZapfeProdukt() {
+        System.out.println("zapfeProdukt");
+        AutomatenSteuerung automat = new AutomatenSteuerung();;
+        Kaffee instance = new Kaffee(120);
+        int expResult = 0;
+        int result = instance.zapfeProdukt(automat);
+        assertEquals(expResult, result);
+        instance = new Kaffee(130);
+        instance.waehleOption(automat, "Milch");
+        result = instance.zapfeProdukt(automat);
+        assertEquals(expResult, result);
+        instance = new Kaffee(140);
+        instance.waehleOption(automat, "Milch");
+        instance.waehleOption(automat, "Zucker");
+        result = instance.zapfeProdukt(automat);
+        assertEquals(expResult, result);
+        instance = new Kaffee(150);
+        instance.waehleOption(automat, "Milch");
+        instance.waehleOption(automat, "Zucker");
+        instance.waehleOption(automat, "Schokostreusel");
+        result = instance.zapfeProdukt(automat);
+        assertEquals(expResult, result);
+        expResult = 10;
+        instance = new Kaffee(160);
+        instance.waehleOption(automat, "Milch");
+        instance.waehleOption(automat, "Zucker");
+        instance.waehleOption(automat, "Schokostreusel");
+        result = instance.zapfeProdukt(automat);
+        assertEquals(expResult, result);
+
+    }
 
     /**
      * Test of abbruch method, of class Kaffee.
