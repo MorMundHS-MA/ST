@@ -5,6 +5,7 @@ import com.coffee.machine.AutomatenSteuerung;
 import com.coffee.machine.Helper;
 
 public class Tee extends Produkt {
+
     private final static String[] optionen = new String[]{"Milch", "Zucker"};
     private final static int preis = 100;
     private final static String name = "Tee";
@@ -23,20 +24,20 @@ public class Tee extends Produkt {
     }
 
     public void waehleOption(AutomatenSteuerung automat, String option) {
-        if (
-                Helper.stringEqualsAny(option, optionen, true) &&
-                        !Helper.stringEqualsAny(option, gewaehlteOptionen.toArray(new String[gewaehlteOptionen.size()]), true)) {
+        if (Helper.stringEqualsAny(option, optionen, true)
+                && !Helper.stringEqualsAny(option, gewaehlteOptionen.toArray(new String[gewaehlteOptionen.size()]), true)) {
             gewaehlteOptionen.add(option);
             printSelectionInfo(super.bezahlterBetrag);
         } else if (Helper.stringEqualsAny(option, optionen, true)) {
-            System.out.printf("Optionen %s bereits ausgewaehlt.", option);
+            System.out.printf("Option %s bereits ausgewaehlt.", option);
         } else {
-            System.out.printf("Optionen %s ist leider nicht verfügbar.", option);
+            System.out.printf("Option %s ist leider nicht verfügbar.", option);
         }
     }
 
     public int fordereWechselgeld(AutomatenSteuerung automat) {
-        return bezahlterBetrag;
+        automat.changeState(new Bezahlung(this, super.bezahlterBetrag));
+        return automat.fordereWechselgeld();
     }
 
     public int zapfeProdukt(AutomatenSteuerung automat) {
