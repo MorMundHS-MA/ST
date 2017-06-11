@@ -29,14 +29,15 @@ public class Kaffee extends Produkt {
             gewaehlteOptionen.add(option);
             printSelectionInfo(super.bezahlterBetrag);
         } else if (Helper.stringEqualsAny(option, optionen, true)) {
-            System.out.printf("Optionen %s bereits ausgewaehlt.", option);
+            System.out.printf("Option %s bereits ausgewaehlt.", option);
         } else {
-            System.out.printf("Optionen %s ist leider nicht verfÃ¼gbar.", option);
+            System.out.printf("Option %s ist leider nicht verfÃ¼gbar.", option);
         }
     }
 
     public int fordereWechselgeld(AutomatenSteuerung automat) {
-        return bezahlterBetrag;
+        automat.changeState(new Bezahlung(this, super.bezahlterBetrag));
+        return automat.fordereWechselgeld();
     }
 
     public int zapfeProdukt(AutomatenSteuerung automat) {
