@@ -2,49 +2,66 @@ package com.coffee.machine.states;
 
 import com.coffee.machine.AutomatenStatus;
 import com.coffee.machine.AutomatenSteuerung;
+import com.coffee.machine.Helper;
 
-public class Kaffee  extends Produkt {
+public class Kaffee extends Produkt {
+
+    private final static String[] optionen = new String[]{"Milch", "Schokostreusel", "Zucker"};
+    private final static int preis = 100;
+    private final static String name = "Kaffee";
+    private final static int preisPerOption = 10;
+
     public Kaffee(int bereitsBezahlt) {
         super(bereitsBezahlt);
     }
 
     public void bezahleBetrag(AutomatenSteuerung automat, int betrag) {
-
+        automat.changeState(new Bezahlung(this, super.bezahlterBetrag));
     }
 
     public void waehleProdukt(AutomatenSteuerung automat, String produkt) {
-
+        System.out.println("Brechen Sie die momentane Bestellung ab um das Produkt neu zuwaehlen.");
     }
 
     public void waehleOption(AutomatenSteuerung automat, String option) {
-
+        if (Helper.stringEqualsAny(option, optionen, true)
+                && !Helper.stringEqualsAny(option, gewaehlteOptionen.toArray(new String[gewaehlteOptionen.size()]), true)) {
+            gewaehlteOptionen.add(option);
+            printSelectionInfo(super.bezahlterBetrag);
+        } else if (Helper.stringEqualsAny(option, optionen, true)) {
+            System.out.printf("Optionen %s bereits ausgewaehlt.", option);
+        } else {
+            System.out.printf("Optionen %s ist leider nicht verfÃ¼gbar.", option);
+        }
     }
 
     public int fordereWechselgeld(AutomatenSteuerung automat) {
-        return 0;
+        return bezahlterBetrag;
     }
 
     public int zapfeProdukt(AutomatenSteuerung automat) {
-        return 0;
+        automat.changeState(new Bezahlung(this, super.bezahlterBetrag));
+        return automat.zapfeProdukt();
     }
 
     public int abbruch(AutomatenSteuerung automat) {
-        return 0;
+        automat.changeState(new Leerlauf());
+        return bezahlterBetrag;
     }
 
     protected String[] getMoeglicheOptionen() {
-        return new String[0];
+        return optionen;
     }
 
     public String getProduktName() {
-        return null;
+        return name;
     }
 
     public int getPreis() {
-        return 0;
+        return preis;
     }
 
     public int getOptionsCost() {
-        return 0;
+        return super.gewaehlteOptionen.size() * preisPerOption;
     }
 }
