@@ -28,7 +28,7 @@ public interface AutomatenStatus {
     /**
      * Schenkt das Produkt aus.
      * @param automat
-     * @return das ausgeschenkte Produkt
+     * @return das Restwechselgeld
      */
     int zapfeProdukt(AutomatenSteuerung automat);
     /**
