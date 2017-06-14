@@ -1,4 +1,4 @@
-1)+Jdoc von countLines überarbeitet
+1) Jdoc von countLines-Methode überarbeitet
 2) Nutze Exceptions anstatt Fehler codes in count lines. Außerdem finally zum sicheren Freigeben der Datei.
 3) Nutze Java Standart Funktion String.indexAt anstelle selbst geschriebener Methode.
 4) Umbennung cache -> currentLine
@@ -7,4 +7,5 @@
 7) Umbennung multiLineComment -> isMultiLineComment.
 8) Entferne schlecht benannte Variablen (comment1-3) und Ersetzung durch ein boolean isComment.
 9) Entferne unnötigen Kommentar "// lokale Variablen"
-10) Einzeilenkommentar "ab hier wird die Datei analysiert" entsprechend als Einzeiler formattieren.
+10) Einzeilenkommentar "ab hier wird die Datei analysiert" entsprechend als Einzeiler formatieren.
+11) Füge Modifier 'private' zu deleteSpace(String original) hinzu.
