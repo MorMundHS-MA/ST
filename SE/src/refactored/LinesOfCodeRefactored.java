@@ -26,8 +26,6 @@ public class LinesOfCodeRefactored {
     public static int countLines(String filename) throws IOException {
         // lokale Variablen
         int lineCounter = 0;
-        String cache;
-        String cacheRest;
         int comment1, comment2, comment3;
         boolean multiLineComment = false;
         BufferedReader javaDatei = null;
@@ -37,15 +35,14 @@ public class LinesOfCodeRefactored {
         try {
             javaDatei = new BufferedReader(new FileReader(filename));
             while (javaDatei.ready()) {
-                cache = javaDatei.readLine();
-                cacheRest = deleteSpaces(cache);
-                if (!cacheRest.equals("")) {
-                    comment1 = cacheRest.indexOf("//");
-                    comment2 = cacheRest.indexOf( "/*");
+                String currentLine = deleteSpaces(javaDatei.readLine());
+                if (!currentLine.equals("")) {
+                    comment1 = currentLine.indexOf("//");
+                    comment2 = currentLine.indexOf("/*");
                     if (comment2 == 0) {
                         multiLineComment = true;
                     }
-                    comment3 =cacheRest.indexOf( "*/");
+                    comment3 = currentLine.indexOf("*/");
                     if (comment3 == 0) {
                         multiLineComment = false;
                     }
@@ -59,21 +56,20 @@ public class LinesOfCodeRefactored {
             return lineCounter;
         } catch (IOException e) {
             throw e;
-        }
-        finally {
+        } finally {
             try {
                 if (javaDatei != null) {
                     javaDatei.close();
                 }
-            }
-            catch (Exception e) {
-                System.out.printf("Failed to close java file %s\n",e.getMessage());
+            } catch (Exception e) {
+                System.out.printf("Failed to close java file %s\n", e.getMessage());
             }
         }
     }
 
     /**
      * Entferne Leerzeichen und Tabs aus einem String.
+     *
      * @param original Original String mit Leerzeichen und Tabs
      * @return Neuer String ohne Leerzeichen und Tabs
      */
