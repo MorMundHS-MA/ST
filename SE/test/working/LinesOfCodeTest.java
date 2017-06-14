@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import original.LinesOfCode;
 import refactored.LinesOfCodeRefactored;
 
 public class LinesOfCodeTest {
@@ -14,12 +15,12 @@ public class LinesOfCodeTest {
 
 	@Test
 	public void testOriginalVersion() throws IOException {
-		assertEquals(10, LinesOfCode.countLines(TEST_FILE_NAME));
+		assertEquals(9, LinesOfCode.countLines(TEST_FILE_NAME));
 	}
 
 	@Test
 	public void testRefactoredVersion() throws IOException {
-		assertEquals(10, LinesOfCodeRefactored.countLines(TEST_FILE_NAME));
+		assertEquals(9, LinesOfCodeRefactored.countLines(TEST_FILE_NAME));
 	}
 
 }
