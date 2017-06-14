@@ -9,13 +9,13 @@ public class LinesOfCodeRefactored {
      * Java-Datei.
      * Eine echte Programmzeilee hier ist eine Zeile, auf die keiner der
      * folgenden Punkte zutrifft:
-     * (1) Die Zeile ist leer oder nur beinhaltet nur Leerzeichen oder
+     * (1) Die Zeile ist leer oder beinhaltet nur Leerzeichen oder
      * Tabulatoren.
      * (2) Die Zeile beginnt nach eventuellen Leerzeichen mit einem
      * Zeilenkommentar, gekennzeichnet mit "//".
      * (3) Die Zeile beginnt mit einem Blockkommentar, gekennzeichnet mit "/*".
-     * (4) In der Zeile endet ein Blockkommentar, gekennzeichnet mit "* /"
-     * ohne Abstand dazwischen.
+     * (4) Die Zeile beginnt nach eventuellen Leerzeichen mit dem Ende eines
+     * Blockkommentars, gekennzeichnet mit "* /" ohne Abstand dazwischen.
      * (5) Die Zeile ist Teil eines Blockkommentars.
      * Alle anderen Zeilen werden als Programmzeilen verstanden und sollen
      * gezählt werden.
