@@ -27,7 +27,7 @@ public class LinesOfCodeRefactored {
         // lokale Variablen
         int lineCounter = 0;
         int comment1, comment2, comment3;
-        boolean multiLineComment = false;
+        boolean isMultiLineComment = false;
         BufferedReader javaDatei = null;
         /*
          * ab hier wird die Datei analysiert
@@ -40,14 +40,14 @@ public class LinesOfCodeRefactored {
                     comment1 = currentLine.indexOf("//");
                     comment2 = currentLine.indexOf("/*");
                     if (comment2 == 0) {
-                        multiLineComment = true;
+                        isMultiLineComment = true;
                     }
                     comment3 = currentLine.indexOf("*/");
                     if (comment3 == 0) {
-                        multiLineComment = false;
+                        isMultiLineComment = false;
                     }
 
-                    if (comment1 != 0 && comment2 != 0 && comment3 != 0 && !multiLineComment) {
+                    if (comment1 != 0 && comment2 != 0 && comment3 != 0 && !isMultiLineComment) {
                         lineCounter++;
                     }
                 }

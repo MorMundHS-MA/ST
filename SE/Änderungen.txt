@@ -3,4 +3,5 @@
 3) Nutze Java Standart Funktion String.indexAt anstelle selbst geschriebener Methode.
 4) Umbennung cache -> currentLine
 5) Entferne nutzlose Variable cacheRest, da currentLine(orig: cache) nur verwendet wird um cacheRest zu setzen.
-6) Deklariere Variable currentLine erst in dem Scope in dem es genutzt wird.
+6) Deklariere Variable currentLine erst in dem Scope in dem es genutzt wird. (Verkürzt Methode und vermeidet Seiteneffekte.)
+7) Umbennung multiLineComment -> isMultiLineComment.
