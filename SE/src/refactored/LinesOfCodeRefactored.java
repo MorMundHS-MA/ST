@@ -70,7 +70,7 @@ public class LinesOfCodeRefactored {
      * @param original Original String mit Leerzeichen und Tabs
      * @return Neuer String ohne Leerzeichen und Tabs
      */
-    static String deleteSpaces(String original) {
+    private static String deleteSpaces(String original) {
         int counter = 0;
         String rest = "";
         if (original.length() == 0) {
