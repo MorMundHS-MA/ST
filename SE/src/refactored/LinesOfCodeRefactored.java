@@ -40,12 +40,12 @@ public class LinesOfCodeRefactored {
                 cache = javaDatei.readLine();
                 cacheRest = deleteSpaces(cache);
                 if (!cacheRest.equals("")) {
-                    comment1 = strScan(cacheRest, "//");
-                    comment2 = strScan(cacheRest, "/*");
+                    comment1 = cacheRest.indexOf("//");
+                    comment2 = cacheRest.indexOf( "/*");
                     if (comment2 == 0) {
                         multiLineComment = true;
                     }
-                    comment3 = strScan(cacheRest, "*/");
+                    comment3 =cacheRest.indexOf( "*/");
                     if (comment3 == 0) {
                         multiLineComment = false;
                     }
@@ -72,7 +72,11 @@ public class LinesOfCodeRefactored {
         }
     }
 
-    // Wenn vorhanden, lösche die Leerzeichen und Tabs
+    /**
+     * Entferne Leerzeichen und Tabs aus einem String.
+     * @param original Original String mit Leerzeichen und Tabs
+     * @return Neuer String ohne Leerzeichen und Tabs
+     */
     static String deleteSpaces(String original) {
         int counter = 0;
         String rest = "";
@@ -89,37 +93,4 @@ public class LinesOfCodeRefactored {
 
         return rest;
     }
-
-    static int strScan(String original, String needle) {
-        int zaehlerOriginal = 0;
-        int zaehlerNeedle = 0;
-        int stelleImString = 0;
-        int laengeOriginal = original.length();
-        int laengeNeedle = needle.length();
-        boolean needleReset = false;
-
-        while (zaehlerOriginal < laengeOriginal) {
-            while (zaehlerOriginal < laengeOriginal
-                    && original.charAt(zaehlerOriginal) == needle.charAt(zaehlerNeedle)) {
-                // Merken der ersten Stelle der gefundenen Zeichenkette zur
-                // Rückgabe.
-                if (zaehlerNeedle == 0) {
-                    stelleImString = zaehlerOriginal;
-                }
-                if (zaehlerNeedle == laengeNeedle - 1) {
-                    return stelleImString;
-                }
-                zaehlerOriginal++;
-                zaehlerNeedle++;
-                needleReset = false;
-            }
-            if (needleReset != false) {
-                zaehlerOriginal++;
-            }
-            zaehlerNeedle = 0;
-            needleReset = true;
-        }
-        return -1;
-    }
-
 }
