@@ -1,1 +1,2 @@
-+Jdoc von countLines überarbeitet
+1)+Jdoc von countLines überarbeitet
+2) Nutze Exceptions anstatt Fehler codes in count lines. Außerdem finally zum sicheren Freigeben der Datei.

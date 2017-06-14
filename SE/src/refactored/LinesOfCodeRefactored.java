@@ -1,58 +1,41 @@
 package refactored;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class LinesOfCodeRefactored {
 
     /**
      * Die Methode liefert die Anzahl "echter Programmzeilen" in einer
-     * Java-Datei. 
+     * Java-Datei.
      * Eine echte Programmzeilee hier ist eine Zeile, auf die keiner der
-     * folgenden Punkte zutrifft: 
-     *  (1) Die Zeile ist leer oder nur beinhaltet nur Leerzeichen oder
-     * Tabulatoren. 
-     *  (2) Die Zeile beginnt nach eventuellen Leerzeichen mit einem 
+     * folgenden Punkte zutrifft:
+     * (1) Die Zeile ist leer oder nur beinhaltet nur Leerzeichen oder
+     * Tabulatoren.
+     * (2) Die Zeile beginnt nach eventuellen Leerzeichen mit einem
      * Zeilenkommentar, gekennzeichnet mit "//".
-     *  (3) Die Zeile beginnt mit einem Blockkommentar, gekennzeichnet mit "/*".
-     *  (4) In der Zeile endet ein Blockkommentar, gekennzeichnet mit "* /"
-     *  ohne Abstand dazwischen.
-     *  (5) Die Zeile ist Teil eines Blockkommentars. 
-     * Alle anderen Zeilen werden als Programmzeilen verstanden und sollen 
+     * (3) Die Zeile beginnt mit einem Blockkommentar, gekennzeichnet mit "/*".
+     * (4) In der Zeile endet ein Blockkommentar, gekennzeichnet mit "* /"
+     * ohne Abstand dazwischen.
+     * (5) Die Zeile ist Teil eines Blockkommentars.
+     * Alle anderen Zeilen werden als Programmzeilen verstanden und sollen
      * gezählt werden.
      *
      * @param filename der Dateiname
-     * @return die Anzahl echter Programmzeilen in der Datei filename, wenn kein
-     * Fehler auftritt, oder einen negativen Fehlercode sonst
+     * @return die Anzahl echter Programmzeilen in der Datei filename
      */
-    public static int countLines(String filename) {
+    public static int countLines(String filename) throws IOException {
         // lokale Variablen
         int lineCounter = 0;
         String cache;
         String cacheRest;
         int comment1, comment2, comment3;
         boolean multiLineComment = false;
-
-        // überprÜfung, ob der Dateiname existiert
-        if (filename == null) {
-            return -1;
-        }
-        // Überprüfung, ob Datei existiert
-        if (!new File(filename).exists()) {
-            return -2;
-        }
-        // Überprüfung, ob die Datei lesbar ist
-        if (!new File(filename).canRead()) {
-            return -3;
-        }
-
+        BufferedReader javaDatei = null;
         /*
          * ab hier wird die Datei analysiert
          */
         try {
-            BufferedReader javaDatei = new BufferedReader(new FileReader(filename));
+            javaDatei = new BufferedReader(new FileReader(filename));
             while (javaDatei.ready()) {
                 cache = javaDatei.readLine();
                 cacheRest = deleteSpaces(cache);
@@ -73,10 +56,20 @@ public class LinesOfCodeRefactored {
                 }
             }
             javaDatei.close();
+            return lineCounter;
         } catch (IOException e) {
-            return -4;
+            throw e;
         }
-        return lineCounter;
+        finally {
+            try {
+                if (javaDatei != null) {
+                    javaDatei.close();
+                }
+            }
+            catch (Exception e) {
+                System.out.printf("Failed to close java file %s\n",e.getMessage());
+            }
+        }
     }
 
     // Wenn vorhanden, lösche die Leerzeichen und Tabs
