@@ -5,3 +5,6 @@
 5) Entferne nutzlose Variable cacheRest, da currentLine(orig: cache) nur verwendet wird um cacheRest zu setzen.
 6) Deklariere Variable currentLine erst in dem Scope in dem es genutzt wird. (Verkürzt Methode und vermeidet Seiteneffekte.)
 7) Umbennung multiLineComment -> isMultiLineComment.
+8) Entferne schlecht benannte Variablen (comment1-3) und Ersetzung durch ein boolean isComment.
+9) Entferne unnötigen Kommentar "// lokale Variablen"
+10) Einzeilenkommentar "ab hier wird die Datei analysiert" entsprechend als Einzeiler formattieren.

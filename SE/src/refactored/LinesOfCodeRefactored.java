@@ -24,30 +24,27 @@ public class LinesOfCodeRefactored {
      * @return die Anzahl echter Programmzeilen in der Datei filename
      */
     public static int countLines(String filename) throws IOException {
-        // lokale Variablen
         int lineCounter = 0;
-        int comment1, comment2, comment3;
         boolean isMultiLineComment = false;
         BufferedReader javaDatei = null;
-        /*
-         * ab hier wird die Datei analysiert
-         */
+        //hier wird die Datei analysiert
         try {
             javaDatei = new BufferedReader(new FileReader(filename));
             while (javaDatei.ready()) {
                 String currentLine = deleteSpaces(javaDatei.readLine());
+                boolean isComment = false;
                 if (!currentLine.equals("")) {
-                    comment1 = currentLine.indexOf("//");
-                    comment2 = currentLine.indexOf("/*");
-                    if (comment2 == 0) {
+                    if(currentLine.indexOf("//") == 0) {
+                        isComment = true;
+                    } else if(currentLine.indexOf("/*") == 0) {
                         isMultiLineComment = true;
-                    }
-                    comment3 = currentLine.indexOf("*/");
-                    if (comment3 == 0) {
+                        isComment = true;
+                    } else if(currentLine.indexOf("*/") == 0) {
                         isMultiLineComment = false;
+                        isComment = true;
                     }
 
-                    if (comment1 != 0 && comment2 != 0 && comment3 != 0 && !isMultiLineComment) {
+                    if (!isComment && !isMultiLineComment) {
                         lineCounter++;
                     }
                 }
