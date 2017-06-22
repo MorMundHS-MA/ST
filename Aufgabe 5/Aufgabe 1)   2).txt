@@ -1,0 +1,18 @@
+Aufgabe 1
+Testen ist… 
+…Suchen nach Fehlern
+…das Erhöhen der Systemstabilität durch dieses
+…systematisch durchführbar, d.h. Tests werden dokumentiert, Randwerte und als kritisch erachtete Werte werden erfasst und getestet
+…intuitiv durchführbar
+…praktisch begrenzt durch die Vielzahl an Kombinationsmöglichkeiten
+
+Testing can be used to show…
+…flaws of a program
+…that a program has at least some stability
+…that a program works in at least those cases with exactly the same parameters as tests which succeeded
+
+Aufgabe 2
+Komponententest
+Integrationstest
+Systemtest: Das Einbringen des Systems auf einem System, Rechner
+Akzeptanztest: Das Testen auf Akzeptanz durch den Nutzer – Bsp.: Beta-Test
