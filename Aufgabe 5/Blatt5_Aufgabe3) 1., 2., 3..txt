@@ -1,0 +1,41 @@
+﻿=== 1) Äquivalenzklassen===
+//--Farbe--
+GültigeWerte(OK) = {ROT,GRUEN,BLAU} UngültigeWerte(Exception:IllegalArgumentException) = {WEISS,GELB,LILA,BRAUN,SCHWARZ}
+//--qrCodeDrucken
+GültigeWerte(OK) = {true,false} UngültigeWerte(-) = {}
+//--breite--
+GültigeWerte(OK) = {7,...,30} UngültigeWerte(Exception:IllegalArgumentException) = {intMin,...,6,31,...,intMax}
+
+**Klassen müssen (eindeutig) nummeriert werden
+
+=== 2) Rand- und kritische Werte===
+//--Farbe--
+keine Randwerte da nicht zählbar
+//--qrCodeDrucken--
+nur zwei Werte
+//--breite--
+GültigeRandWerte = {7,30} ÜngültigeRandWerte = {intMin,6,31,intMax} ÜngültigeKritischeWerte = {-1,0,5,32}
+
+
+=== 3) Konkrete Testfälle===
+
+////--Farbe--
+//OK
+druckeEtikett( ROT, false, 7 )
+druckeEtikett( GRUEN, false, 30 )
+druckeEtikett( BLAU, true, 7 )
+//IllegalArgumentException
+druckeEtikett( WEISS, false, 7 )
+
+////--qrCodeDrucken--
+//OK
+druckeEtikett(GRUEN, true, 7)
+druckeEtikett(GRUEN, false, 7)
+//IllegalArgumentException
+druckeEtikett(ROT, , 7)
+////--breite--
+//OK
+druckeEtikett(ROT, FALSE, 30)
+//IllegalArgumentException
+druckeEtikett(ROT, FALSE, intMin)
+druckeEtikett(ROT, FALSE, 32)
