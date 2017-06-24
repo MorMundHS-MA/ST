@@ -12,7 +12,7 @@ Testing can be used to show…
 …that a program works in at least those cases with exactly the same parameters as tests which succeeded
 
 Aufgabe 2
-Komponententest
-Integrationstest
-Systemtest: Das Einbringen des Systems auf einem System, Rechner
-Akzeptanztest: Das Testen auf Akzeptanz durch den Nutzer – Bsp.: Beta-Test
+Komponententest: Test von Systemteilen wie z.B. Klassen bspw. mit JUnit
+Integrationstest: Test unter Zusammenbringen von Systemteilen bspw. mit JUnit
+Systemtest: Das Einbringen des Systems auf einem System, z.B. Server oder Rechner; Bsp.: Serverstresstest von Blizzard: Öffentlicher Diablo 3 Beta-Zugang für jeden, der das Spiel ausprobieren möchte
+Akzeptanztest:  Formelles Testen um zu entscheiden ob der Kunde das Produkt akzeptiert. Bsp.: Beta-Test mit Feedback anhand dessen der Kunde Produktentscheidungen trifft
