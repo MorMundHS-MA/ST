@@ -22,13 +22,14 @@ public class EtikettenDruckerTest {
     }
 
     /**
-     * Deckt Gültige Äquivalenzklassen #000, #001, #002, #100, #101, #200 ab
+     * Deckt Gültige Äquivalenzklassen #000, #001, #002, #100, #101, #200 und
+     * Randwerte {7, 30} ab.
      */
     @Test
     public void gültigeParameterKombinationen() {
-        printer.druckeEtikett(Farbe.ROT, true, 7);
-        printer.druckeEtikett(Farbe.BLAU, false, 30);
-        printer.druckeEtikett(Farbe.GRUEN, true, 7);
+        printer.druckeEtikett(Farbe.ROT, false, 7);
+        printer.druckeEtikett(Farbe.GRUEN, false, 30);
+        printer.druckeEtikett(Farbe.BLAU, true, 7);
     }
 
     /**
@@ -36,34 +37,36 @@ public class EtikettenDruckerTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void ungültigeFarbe() {
-        printer.druckeEtikett(Farbe.LILA, true, 7);
+        printer.druckeEtikett(Farbe.GELB, true, 7);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void nullAlsFarbe() {
         printer.druckeEtikett(null, true, 7);
     }
+
     /**
-     * Deckt Ungültige Äquivalenzklasse #200 ab
+     * Deckt Ungültige Äquivalenzklasse #210 und kritische Werte {-1, 0, 5} ab
+     * und Randwerte {Integer.MIN_VALUE, 6} ab.
      */
-    @Test
-    public void legaleBreite() {
-        printer.druckeEtikett(Farbe.ROT, false, 30);
-    }
-    /**
-     * Deckt Ungültige Äquivalenzklasse #210 ab
-     */
-    @Test(expected = IllegalArgumentException.class)
+    @Test//(expected = IllegalArgumentException.class)
     public void zuKleineBreite() {
-        printer.druckeEtikett(Farbe.ROT, true, 6);
+        printer.druckeEtikett(Farbe.ROT, false, (int) Integer.MIN_VALUE);
+        printer.druckeEtikett(Farbe.ROT, false, -1);
+        printer.druckeEtikett(Farbe.ROT, false, 0);
+        printer.druckeEtikett(Farbe.ROT, false, 5);
+        printer.druckeEtikett(Farbe.ROT, false, 6);
     }
 
     /**
-     * Deckt Ungültige Äquivalenzklasse #211 ab
+     * Deckt Ungültige Äquivalenzklasse #211 und kritischen Wert {32} und
+     * Randwerte {31, Integer.MAX_VALUE} ab.
      */
     @Test(expected = IllegalArgumentException.class)
     public void zuGroßeBreite() {
-        printer.druckeEtikett(Farbe.ROT, true, 31);
+        printer.druckeEtikett(Farbe.ROT, false, 31);
+        printer.druckeEtikett(Farbe.ROT, false, 32);
+        printer.druckeEtikett(Farbe.ROT, false, (int) Integer.MAX_VALUE);
     }
 
 }
