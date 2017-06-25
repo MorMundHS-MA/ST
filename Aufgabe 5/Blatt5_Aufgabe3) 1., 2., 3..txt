@@ -1,12 +1,24 @@
-﻿=== 1) Äquivalenzklassen===
+=== 1) Äquivalenzklassen===
 //--Farbe--
-GültigeWerte(OK) = {ROT,GRUEN,BLAU} UngültigeWerte(Exception:IllegalArgumentException) = {WEISS,GELB,LILA,BRAUN,SCHWARZ}
+GültigeWerte(OK) = {ROT,GRUEN,BLAU} 
+#000[ROT]
+#001[GRUEN]
+#002[BLAU]
+UngültigeWerte(Exception:IllegalArgumentException) = {WEISS,GELB,LILA,BRAUN,SCHWARZ}
+#010[WEISS]
 //--qrCodeDrucken
-GültigeWerte(OK) = {true,false} UngültigeWerte(-) = {}
+GültigeWerte(OK) = {true,false} 
+#100[true]
+#101[false]
+UngültigeWerte(-) = {}
+#110[]
 //--breite--
-GültigeWerte(OK) = {7,...,30} UngültigeWerte(Exception:IllegalArgumentException) = {intMin,...,6,31,...,intMax}
+GültigeWerte(OK) = {7,...,30} 
+#200[7]
+UngültigeWerte(Exception:IllegalArgumentException) = {intMin,...,6,31,...,intMax}
+#210[6]
+#211[31]
 
-**Klassen müssen (eindeutig) nummeriert werden
 
 === 2) Rand- und kritische Werte===
 //--Farbe--
@@ -21,21 +33,19 @@ GültigeRandWerte = {7,30} ÜngültigeRandWerte = {intMin,6,31,intMax} Üngülti
 
 ////--Farbe--
 //OK
-druckeEtikett( ROT, false, 7 )
-druckeEtikett( GRUEN, false, 30 )
-druckeEtikett( BLAU, true, 7 )
+druckeEtikett( ROT, false, 7 ) --> #000, #101, #200
+druckeEtikett( GRUEN, false, 30 ) --> #001, #101, #200
+druckeEtikett( BLAU, true, 7 ) --> #002, #100, #200
 //IllegalArgumentException
-druckeEtikett( WEISS, false, 7 )
-
+druckeEtikett( GELB, false, 7 ) --> #010
 ////--qrCodeDrucken--
 //OK
-druckeEtikett(GRUEN, true, 7)
-druckeEtikett(GRUEN, false, 7)
+-s. Oben-
 //IllegalArgumentException
-druckeEtikett(ROT, , 7)
+druckeEtikett(ROT, null, 7) --> #110
 ////--breite--
 //OK
-druckeEtikett(ROT, FALSE, 30)
+-s. Oben-
 //IllegalArgumentException
-druckeEtikett(ROT, FALSE, intMin)
-druckeEtikett(ROT, FALSE, 32)
+druckeEtikett(ROT, FALSE, intMin) --> #210 und {-1, 0, 5} abgedeckt
+druckeEtikett(ROT, FALSE, 31) --> #211 und {32} abgedeckt
