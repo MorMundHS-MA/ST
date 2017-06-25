@@ -21,7 +21,7 @@ UngültigeWerte(Exception:IllegalArgumentException) = {intMin,...,6,31,...,intMa
 
 Schema für  #XYZ: 
 •X steht für den Parameter, auf die sich die Äquivalenzklasse bezieht
-•Y = 0 bedeutet dass die Äquivalenzklasse gültig ist, Y = 1 bedeutet, dass sied ungültig ist
+•Y = 0 bedeutet, dass die Äquivalenzklasse gültig ist, Y = 1 bedeutet, dass sie ungültig ist
 •Z steht für die Nummer einer gültigen / ungültigen Äquivalenzklasse eines Parameters.
 
 === 2) Rand- und kritische Werte===
@@ -37,9 +37,9 @@ GültigeRandWerte = {7,30} ÜngültigeRandWerte = {intMin,6,31,intMax} Üngülti
 
 ////--Farbe--
 //OK
-druckeEtikett( ROT, false, 7 ) --> #000, #101, #200
-druckeEtikett( GRUEN, false, 30 ) --> #001, #101, #200
-druckeEtikett( BLAU, true, 7 ) --> #002, #100, #200
+druckeEtikett( ROT, false, 7 ) --> #000, #101, #200 und unteren Randwert {7}
+druckeEtikett( GRUEN, false, 30 ) --> #001, #101, #200 und oberen Randwert {30}
+druckeEtikett( BLAU, true, 7 ) --> #002, #100, #200 und unteren Randwert {7}
 //IllegalArgumentException
 druckeEtikett( GELB, false, 7 ) --> #010
 ////--qrCodeDrucken--
@@ -51,5 +51,11 @@ druckeEtikett(ROT, , 7) --> #110; Wird vom Compiler abgefangen
 //OK
 -s. Oben-
 //IllegalArgumentException
-druckeEtikett(ROT, FALSE, intMin) --> #210 und {-1, 0, 5} abgedeckt
-druckeEtikett(ROT, FALSE, 31) --> #211 und {32} abgedeckt
+druckeEtikett(ROT, FALSE, intMin) --> #210 und {intMin} abgedeckt
+druckeEtikett(ROT, FALSE, -1) --> #210 und {-1} abgedeckt
+druckeEtikett(ROT, FALSE, 0) --> #210 und {0} abgedeckt
+druckeEtikett(ROT, FALSE, 5) --> #210 und {5} abgedeckt
+druckeEtikett(ROT, FALSE, 6) --> #210 und {6} abgedeckt
+druckeEtikett(ROT, FALSE, 31) --> #211 und {31} abgedeckt
+druckeEtikett(ROT, FALSE, 32) --> #211 und {32} abgedeckt
+druckeEtikett(ROT, FALSE, intMax) --> #211 und {intMax} abgedeckt
