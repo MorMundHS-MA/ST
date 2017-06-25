@@ -19,6 +19,10 @@ UngültigeWerte(Exception:IllegalArgumentException) = {intMin,...,6,31,...,intMa
 #210[6]
 #211[31]
 
+Schema für  #XYZ: 
+•X steht für den Parameter, auf die sich die Äquivalenzklasse bezieht
+•Y = 0 bedeutet dass die Äquivalenzklasse gültig ist, Y = 1 bedeutet, dass sied ungültig ist
+•Z steht für die Nummer einer gültigen / ungültigen Äquivalenzklasse eines Parameters.
 
 === 2) Rand- und kritische Werte===
 //--Farbe--
@@ -41,8 +45,8 @@ druckeEtikett( GELB, false, 7 ) --> #010
 ////--qrCodeDrucken--
 //OK
 -s. Oben-
-//IllegalArgumentException
-druckeEtikett(ROT, null, 7) --> #110
+//-
+druckeEtikett(ROT, , 7) --> #110; Wird vom Compiler abgefangen
 ////--breite--
 //OK
 -s. Oben-
