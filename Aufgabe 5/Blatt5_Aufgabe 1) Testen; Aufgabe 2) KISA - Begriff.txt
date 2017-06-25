@@ -14,5 +14,5 @@ Testing can be used to show…
 Aufgabe 2
 Komponententest: Test von Systemteilen wie z.B. Klassen bspw. mit JUnit
 Integrationstest: Test unter Zusammenbringen von Systemteilen bspw. mit JUnit
-Systemtest: Das Einbringen des Systems auf einem System, z.B. Server oder Rechner; Bsp.: Serverstresstest von Blizzard: Öffentlicher Diablo 3 Beta-Zugang für jeden, der das Spiel ausprobieren möchte
+Systemtest: Das Einbringen des Systems auf einem System, z.B. Server oder Rechner; Bsp.: Serverstresstest von Blizzard: Öffentlicher Diablo 3 Beta-Zugang für jeden, der das Spiel ausprobieren möchte, um festzustellen, ob die Server dem Datenfluss standhalten.
 Akzeptanztest:  Formelles Testen um zu entscheiden ob der Kunde das Produkt akzeptiert. Bsp.: Beta-Test mit Feedback anhand dessen der Kunde Produktentscheidungen trifft
